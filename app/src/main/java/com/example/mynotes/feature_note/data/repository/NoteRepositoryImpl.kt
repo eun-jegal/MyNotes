@@ -21,7 +21,7 @@ class NoteRepositoryImpl(
         dao.insertNote(note)
     }
 
-    override suspend fun deleteNote(note: Note) {
-        dao.deleteNode(note)
+    override suspend fun deleteNote(noteId: Int) {
+        dao.deleteNode(noteId)
     }
 }

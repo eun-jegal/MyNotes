@@ -8,10 +8,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -56,43 +60,79 @@ fun AddEditNoteScreen(
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
                     navController.navigateUp()
                 }
+                is AddEditNoteViewModel.UiEvent.DeleteNote -> {
+                    navController.navigateUp()
+                }
+                is AddEditNoteViewModel.UiEvent.NavigateUp -> {
+                    navController.navigateUp()
+                }
             }
         }
     }
 
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(
-            onClick = { viewModel.onEvent(AddEditNoteEvent.SaveNote) },
-            backgroundColor = MaterialTheme.colors.primary
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_baseline_save_24),
-                contentDescription = "Save note"
-            )
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { viewModel.onEvent(AddEditNoteEvent.SaveNote) },
+                backgroundColor = MaterialTheme.colors.primary
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_save_24),
+                    contentDescription = "Save note"
+                )
+            }
+        },
+        topBar = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(64.dp)
+                    .background(color = MaterialTheme.colors.primary)
+                    .padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                IconButton(onClick = { viewModel.onEvent(AddEditNoteEvent.NavigateUp) }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Navigate up",
+                        tint = Color.White
+                    )
+                }
+                if (titleState.text.isNotBlank()) {
+                    IconButton(onClick = { viewModel.onEvent(AddEditNoteEvent.DeleteNote) }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete the note",
+                            tint = Color.White
+                        )
+                    }
+                }
+            }
         }
-    }) {
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(backgroundAnimatable.value)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Note.noteColors.forEach { color ->
                     val colorInt = color.toArgb()
                     Box(
                         modifier = Modifier
-                            .size(50.dp)
+                            .size(35.dp)
                             .shadow(16.dp, CircleShape)
                             .clip(CircleShape)
                             .background(color)
                             .border(
-                                width = 4.dp,
+                                width = 2.dp,
                                 color = if (viewModel.noteColor.value == colorInt) {
                                     Color.Black
                                 } else {
@@ -114,7 +154,7 @@ fun AddEditNoteScreen(
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             TransparentHintTextField(
                 text = titleState.text,
                 hint = titleState.hint,
@@ -126,8 +166,9 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.h5
+                textStyle = MaterialTheme.typography.h4
             )
+            Spacer(modifier = Modifier.height(8.dp))
             TransparentHintTextField(
                 text = contentState.text,
                 hint = contentState.hint,
@@ -138,6 +179,7 @@ fun AddEditNoteScreen(
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                 },
                 isHintVisible = contentState.isHintVisible,
+                singleLine = false,
                 textStyle = MaterialTheme.typography.body1,
                 modifier = Modifier.fillMaxHeight()
             )

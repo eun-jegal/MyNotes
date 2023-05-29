@@ -24,6 +24,16 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp
     ),
+    h4 = TextStyle(
+        fontFamily = fonts_dm_sans,
+        fontWeight = FontWeight.Medium,
+        fontSize = 24.sp
+    ),
+    h5 = TextStyle(
+        fontFamily = fonts_dm_sans,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp
+    ),
     body1 = TextStyle(
         fontFamily = fonts_dm_sans,
         fontWeight = FontWeight.Normal,

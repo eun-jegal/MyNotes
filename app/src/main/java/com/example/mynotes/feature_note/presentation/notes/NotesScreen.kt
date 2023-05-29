@@ -87,6 +87,7 @@ fun NotesScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
+            Spacer(modifier = Modifier.height(16.dp))
             if (state.notes.isEmpty()) {
                 Box(
                     modifier = Modifier.fillMaxSize()
@@ -99,7 +100,10 @@ fun NotesScreen(
                     )
                 }
             }
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 items(state.notes) { note ->
                     NoteItem(
                         note = note,

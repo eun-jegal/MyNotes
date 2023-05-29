@@ -23,14 +23,14 @@ class AddEditNoteViewModel @Inject constructor(
 
     private val _noteTitle = mutableStateOf(
         NoteTextFieldState(
-            hint = "Title here.."
+            hint = "Title"
         )
     )
     val noteTitle: State<NoteTextFieldState> = _noteTitle
 
     private val _noteContent = mutableStateOf(
         NoteTextFieldState(
-            hint = "Content here.."
+            hint = "Content"
         )
     )
     val noteContent: State<NoteTextFieldState> = _noteContent
@@ -85,6 +85,19 @@ class AddEditNoteViewModel @Inject constructor(
             is AddEditNoteEvent.ChangeColor -> {
                 _noteColor.value = event.color
             }
+            is AddEditNoteEvent.DeleteNote -> {
+                viewModelScope.launch {
+                    currentNoteId?.let {
+                        noteUseCases.deleteNote(it)
+                    }
+                    _eventFlow.emit(UiEvent.DeleteNote)
+                }
+            }
+            is AddEditNoteEvent.NavigateUp -> {
+                viewModelScope.launch {
+                    _eventFlow.emit(UiEvent.NavigateUp)
+                }
+            }
             is AddEditNoteEvent.SaveNote -> {
                 viewModelScope.launch {
                     try {
@@ -113,5 +126,7 @@ class AddEditNoteViewModel @Inject constructor(
     sealed class UiEvent {
         data class ShowSnackBar(val message: String) : UiEvent()
         object SaveNote : UiEvent()
+        object DeleteNote: UiEvent()
+        object NavigateUp: UiEvent()
     }
 }
