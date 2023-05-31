@@ -40,7 +40,7 @@
    </ul>
 </ul>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/57670625/235320692-23885120-7757-4ab9-868f-4bc42eec135d.jpg" width="85%"/>
+   <img src="" width="85%"/>
 </p>
 
 <h3>Architecture Overview</h3>
@@ -48,7 +48,7 @@
 
 <h3>UI Layer</h3>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/57670625/235320690-5a3cb2a2-1473-432c-bff5-8379241bcc22.jpg" width="85%"//>
+   <img src="https://github.com/eun-jegal/MyNotes/assets/57670625/3210a029-9bdd-4c80-b56a-7b2e6c5f1500" width="85%"//>
 </p>
 <p>UI layer displays the application data and serves as the primary point for user interactions. Whenever the app data changes, the UI should update to reflect changes made by either user interaction or external input.</p>
 <ul>
@@ -58,9 +58,20 @@
 </ul>
 <br>
 
+<h3>Domain Layer</h3>
+<p align="center">
+   <img src="https://github.com/eun-jegal/MyNotes/assets/57670625/99c1c7f3-2e50-43e2-bac5-3e144834586b" width="65%"/>
+</p>
+<p>Domain layer is reponsible for containing application data and business logics. The data layer is consisted of repositories and data sources. It is important to keep each repository as a single source of truth.</p>
+<ul>
+  <li>PokemonRepository is a single source of truth and requests data from the remote data source.</li>
+  <li>PokemonRepository requests network responses to PokeAPI server using Retrofit library.</li>
+</ul>
+<br>
+
 <h3>Data Layer</h3>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/57670625/235320689-16de6724-0570-43ac-aa4d-786f879ffeb0.jpg" width="65%"/>
+   <img src="https://github.com/eun-jegal/MyNotes/assets/57670625/e6682057-68cf-4999-ae71-08a8bcc124ce" width="65%"/>
 </p>
 <p>Data layer is reponsible for containing application data and business logics. The data layer is consisted of repositories and data sources. It is important to keep each repository as a single source of truth.</p>
 <ul>
@@ -69,14 +80,7 @@
 </ul>
 <br>
 
-<!-- Open APIs -->
-<h2>Open APIs</h2>
-<img src="https://user-images.githubusercontent.com/57670625/235320883-b4eae21e-93c0-4229-abaf-642d1cb4bc34.png" align="right" width="21%"/>
-<br>
-<p>Pokedex uses <a href="https://pokeapi.co/">PokeApi</a> for fetching JSON object from the server. PokeApi provides a full RESTful API linked to an extensive database detailing everything about the Pokémon main game series.</p>
-<br>
-
 <!-- References -->
 <h2>References</h2>
 <p>This project was built to understand how to build a clean architecture Jetpack Compose app using differnt types of Android libraries.</p>
-<li><a href="https://www.youtube.com/watch?v=v0of23TxIKc&list=PLQkwcJG4YTCTimTCpEL5FZgaWdIZQuB7m">Youtube Tutorial</a>: Step-by-step tutorial to build Android Pokedex app using PokeApi</li>
+<li><a href="https://www.youtube.com/watch?v=v0of23TxIKc&list=PLQkwcJG4YTCTimTCpEL5FZgaWdIZQuB7m">Youtube Tutorial</a>: Step-by-step tutorial to build My Notes app</li>
